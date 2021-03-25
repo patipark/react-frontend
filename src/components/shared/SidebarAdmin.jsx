@@ -6,7 +6,7 @@ import { faTachometerAlt, faDatabase, faChartPie, faMap, faImage, faTable, faRoc
 
 const SidebarAdmin = () => {
   return (
-    <aside className="bg-sidebar min-h-screen w-64 hidden sm:block shadow-xl relative">
+    <aside className="bg-sidebar min-h-screen w-72 hidden sm:block shadow-md relative">
 
       <div className="p-6">
         <NavLink to="/dashboard" className="text-white text-2xl font-semibold uppercase hover:text-gray-300">

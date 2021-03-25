@@ -8,6 +8,7 @@ import Dashboard from './pages/dashboard/Dashboard'
 import FirebaseAuth from './pages/firebaseauth/FirebaseAuth'
 import FirebaseCRUD from './pages/firebasecrud/FirebaseCRUD'
 import FirebaseStorage from './pages/firebasestorage/FirebaseStorage'
+import Forgotpassword from './pages/forgotpassword/Forgotpassword'
 import GoogleMapAPI from './pages/googlemap/GoogleMapAPI'
 import Home from './pages/home/Home'
 import HookForm from './pages/hookform/HookForm'
@@ -43,6 +44,7 @@ const Routes = () => {
             {/* Authen */}
             <AppRoute path="/login" layout={AuthLayout} component={Login} />
             <AppRoute path="/register" layout={AuthLayout} component={Register} />
+            <AppRoute path="/forgotpassword" layout={AuthLayout} component={Forgotpassword} />
 
             {/* Backend */}
             <AppRoute path="/dashboard" layout={AdminLayout} component={Dashboard} />

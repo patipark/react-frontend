@@ -3,9 +3,6 @@ import NavbarAdmin from '../shared/NavbarAdmin'
 import SidebarAdmin from '../shared/SidebarAdmin'
 
 const AdminLayout = ({children}) => {
-    // document.body.classList.add('bg-gray-100');
-    // document.body.classList.add('font-family-karla');
-    // document.body.classList.add('flex');
     return (
         <div className="flex bg-gray-100 font-family-karla">
             <SidebarAdmin />
