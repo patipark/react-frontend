@@ -1,10 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 import { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTable } from "@fortawesome/free-solid-svg-icons"
 import api from '../../services/productAPI'
 import { baseURLAPI } from '../../constants/configAxios'
+import NumberFormat from 'react-number-format'
+
+import dayjs from 'dayjs'
+import thai from 'dayjs/locale/th'
+import relativeTime  from 'dayjs/plugin/relativeTime'
+import buddhistEra from 'dayjs/plugin/buddhistEra'
+
+dayjs.locale(thai)
+dayjs.extend(relativeTime)
+dayjs.extend(buddhistEra)
 
 const ProductList = () => {
 
@@ -99,7 +109,14 @@ const ProductList = () => {
 
                   <td className="px-5 py-5 border-b">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {product.price} บาท
+                      <NumberFormat 
+                        value={product.price} 
+                        displayType={'text'} 
+                        thousandSeparator={true} 
+                        fixedDecimalScale={true}
+                        decimalScale={2}
+                        // prefix={'$'}
+                       /> บาท
                     </p>
                   </td>
 
@@ -118,7 +135,7 @@ const ProductList = () => {
                   <td className="px-5 py-5 border-b text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
 
-                    {product.created_at}
+                    { dayjs(product.created_at).format('D MMM BBBB H:m:s') }
 
                     </p>
                   </td>
@@ -126,7 +143,7 @@ const ProductList = () => {
                   <td className="px-5 py-5 border-b text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
 
-                    {product.updated_at}
+                    { dayjs().to(dayjs(product.updated_at)) }
 
                     </p>
                   </td>
