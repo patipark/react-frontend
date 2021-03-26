@@ -4,6 +4,7 @@
 import { useContext , useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { UserContext} from '../../context/UserContext'
+import { useForm } from 'react-hook-form'
 
 const Login = () => {
 
@@ -11,12 +12,15 @@ const Login = () => {
 
     // เรียกใช้งาน Context
     const {user, setUser} = useContext(UserContext)
-
     console.log("user", user)
 
-    // useEffect(() => {
-    //     setUser("abc")
-    // }, [user])
+    // เรียกใช้งาน React Hook From
+    const { register, handleSubmit, errors } = useForm()
+
+    // ฟังก์ชันหลังจาก Submit form
+    const onSubmit = (data) => {
+        console.log(data)
+    }
 
     return (
         
@@ -41,14 +45,26 @@ const Login = () => {
             </header>
 
             {/* form */}
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <label className="block mb-2 text-indigo-500" htmlFor="username">Email</label>
-                    <input className="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="email" name="username" />
+                    <label className="block mb-2 text-indigo-500" htmlFor="email">Email</label>
+                    <input className="w-full p-2 mb-3 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" 
+                    type="email"
+                    id="email"
+                    name="email" 
+                    ref={register({required: true})}
+                    />
+                    {errors.email && <p className="text-red-500 mb-6">กรุณาป้อนอีเมล์ก่อน</p>}
                 </div>
                 <div>
                     <label className="block mb-2 text-indigo-500" htmlFor="password">Password</label>
-                    <input className="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="password" name="password" />
+                    <input className="w-full p-2 mb-3 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" 
+                    type="password"
+                    id="password" 
+                    name="password"
+                    ref={register({required: true})}
+                    />
+                    {errors.password && <p className="text-red-500 mb-6">กรุณาป้อนรหัสผ่านก่อน</p>}
                 </div>
                 <div>          
                     <input className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit" value="Login" />
