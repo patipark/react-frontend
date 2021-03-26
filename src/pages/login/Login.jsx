@@ -1,17 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useHistory } from "react-router-dom"
-import {NavLink} from 'react-router-dom'
+import { useContext , useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
+import { UserContext} from '../../context/UserContext'
 
 const Login = () => {
 
     document.title = 'Login'
 
-    let history = useHistory()
+    // เรียกใช้งาน Context
+    const {user, setUser} = useContext(UserContext)
 
-    const handleLogin = () => {
-        history.push('/dashboard')
-    }
+    console.log("user", user)
+
+    // useEffect(() => {
+    //     setUser("abc")
+    // }, [user])
 
     return (
         
@@ -46,7 +51,7 @@ const Login = () => {
                     <input className="w-full p-2 mb-6 text-indigo-700 border-b-2 border-indigo-500 outline-none focus:bg-gray-300" type="password" name="password" />
                 </div>
                 <div>          
-                    <input className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit" value="Login" onClick={handleLogin} />
+                    <input className="w-full bg-indigo-700 hover:bg-pink-700 text-white font-bold py-2 px-4 mb-6 rounded" type="submit" value="Login" />
                 </div>       
             </form>
 
