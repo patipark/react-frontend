@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 import {useState, useRef} from 'react';
-import { NavLink } from "react-router-dom"
+import { NavLink, useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTachometerAlt, faDatabase, faChartPie, faMap, faImage, faTable, faRocket, faInbox, faLock, faShoppingCart, faKey, faVideo, faFilePdf, faBars, faTimes, faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 import useOutsideClick from "./useOutsideClick";
@@ -16,6 +16,13 @@ const NavbarAdmin = () => {
     setIsActive(false)
   });
 
+  // Logout และ Clear storage
+  let history = useHistory();
+  const logOut = () => {
+    localStorage.removeItem('token')
+    history.push('/login')
+  }
+
   return (
     <>
     {/* Header for desktop size */}
@@ -28,7 +35,7 @@ const NavbarAdmin = () => {
         <div className={`${ isActive ? 'block':'hidden'} absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16`}>
         <NavLink to="/account" className="block px-4 py-2 account-link hover:text-white">Account</NavLink>
         <NavLink to="/support" className="block px-4 py-2 account-link hover:text-white">Support</NavLink>
-        <NavLink to="/login" className="block px-4 py-2 account-link hover:text-white">Sign Out</NavLink>
+        <a href="#login" onClick={()=>logOut()} className="block px-4 py-2 account-link hover:text-white">Sign Out</a>
         </div>
     </div>
     </header>
