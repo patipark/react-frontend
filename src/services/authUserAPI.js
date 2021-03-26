@@ -1,8 +1,9 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios';
 
 const baseURLAPI = 'http://localhost:1337/'
 
-const authUserAPI = (data) => {
+const authLogin = (data) => {
     return axios.post('auth/local', data, {
         baseURL: baseURLAPI,
         headers: {
@@ -11,4 +12,4 @@ const authUserAPI = (data) => {
     })
 }
 
-export default authUserAPI
+export default { authLogin }

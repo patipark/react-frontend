@@ -2,13 +2,17 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useContext , useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { UserContext} from '../../context/UserContext'
 import { useForm } from 'react-hook-form'
+import api from '../../services/authUserAPI'
+import Swal from 'sweetalert2'
 
 const Login = () => {
 
     document.title = 'Login'
+
+    let history = useHistory()
 
     // เรียกใช้งาน Context
     const {user, setUser} = useContext(UserContext)
@@ -19,7 +23,36 @@ const Login = () => {
 
     // ฟังก์ชันหลังจาก Submit form
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
+
+        const authData = {
+            "identifier": data.email,
+            "password": data.password
+        }
+
+        // เรียก API Login
+        api.authLogin(authData).then(res => {
+            console.log(res)
+
+            // Set Context
+            setUser(res)
+
+            // เก็บ Token ลง LocalStorage
+            localStorage.setItem("token", res.data.jwt)
+
+            // Redirect ไปหน้า dashboad
+            history.push('/dashboard')
+
+        }).catch(error => {
+            // console.log(error)
+            if(error.response.status === 400){
+                Swal.fire({
+                    icon: 'error',
+                    text: 'ข้อมูลเข้าระบบไม่ถูกต้อง ลองใหม่',
+                    confirmButtonText: 'ปิดหน้าต่าง'
+                })
+            }
+        })
     }
 
     return (
