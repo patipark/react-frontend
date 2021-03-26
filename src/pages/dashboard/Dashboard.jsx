@@ -1,6 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartPie, faChartArea, faTable } from "@fortawesome/free-solid-svg-icons"
+import { Bar, Line, Pie, Doughnut } from 'react-chartjs-2';
 const Dashboard = () => {
+
+    // ตัวแปรสำหรับเก็บข้อมูล chart
+    const state = {
+        labels:['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
+        datasets:[
+            {
+                label:'ยอดขาย',
+                data:[75,110,192,35,63,150,100,42,88,91,200,62],
+                backgroundColor:'rgba(75,192,192,1)',
+                borderWidht:1,
+            }
+        ]
+    }
+
     document.title = 'Dashboard'
     return (
         <>
@@ -12,7 +27,20 @@ const Dashboard = () => {
                         <FontAwesomeIcon icon={faChartPie} />&nbsp; Monthly Reports
                     </p>
                     <div className="p-6 bg-white">
-                        <canvas id="chartOne" width={400} height={200} />
+                        
+                        <Bar
+                            height={300}
+                            data={state} 
+                            options={{
+                                maintainAspectRatio:false,
+                                title:{
+                                    display:true,
+                                    text:'ยอดขายรายเดือน',
+                                    fontSize:20
+                                },
+                                
+                        }} /> 
+
                     </div>
                     </div>
                     <div className="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0">
@@ -20,7 +48,19 @@ const Dashboard = () => {
                     <FontAwesomeIcon icon={faChartArea} />&nbsp; Resolved Reports
                     </p>
                     <div className="p-6 bg-white">
-                        <canvas id="chartTwo" width={400} height={200} />
+                        
+                        <Line height={300}
+                            data={state} 
+                            options={{
+                                maintainAspectRatio:false,
+                                title:{
+                                    display:true,
+                                    text:'ยอดขายรายเดือน',
+                                    fontSize:20
+                                }
+                                
+                        }} />
+
                     </div>
                     </div>
                 </div>
